@@ -6,14 +6,17 @@
 
 void ofxShape::setupFilledSquare(float diameter_) {
     setup(FILL_TYPE_FILLED, 4, diameter_, diameter_);
+    rotateZ(45);
 }
 
 void ofxShape::setupHollowSquare(float thickness_, float diameter_) {
-    setup(FILL_TYPE_GRADIENT, 4, thickness_, diameter_);
+    setup(FILL_TYPE_HOLLOW, 4, thickness_, diameter_);
+    rotateZ(45);
 }
 
 void ofxShape::setupGradientSquare(float thickness_, float diameter_) {
     setup(FILL_TYPE_GRADIENT, 4, thickness_, diameter_);
+    rotateZ(45);
 }
 
 void ofxShape::setupFilledRing(int resolution, float diameter_) {
