@@ -23,4 +23,5 @@ class ofApp : public ofBaseApp{
     
     ofxShapeSystem shapeSystem;
     ofxShape filledSquare, hollowSquare, gradientSquare, invertedGradientSquare;
+    ofxShape filledRing, hollowRing, gradientRing, invertedGradientRing;
 };

@@ -3,6 +3,7 @@
 void ofApp::setup(){
     shapeSystem.setup();
 
+    // Squares
     filledSquare.setupFilledSquare(100);
     filledSquare.setPosition(ofVec3f(120, 100, 0));
     shapeSystem.add(filledSquare);
@@ -20,6 +21,25 @@ void ofApp::setup(){
     invertedGradientSquare.setPosition(ofVec3f(120, 640, 0));
     invertedGradientSquare.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(invertedGradientSquare);
+
+    // Rings
+    filledRing.setupFilledRing(60, 72);
+    filledRing.setPosition(ofVec3f(320, 100, 0));
+    shapeSystem.add(filledRing);
+
+    hollowRing.setupHollowRing(60, 15, 57);
+    hollowRing.setPosition(ofVec3f(320, 280, 0));
+    shapeSystem.add(hollowRing);
+
+    gradientRing.setupGradientRing(60, 15, 57);
+    gradientRing.setPosition(ofVec3f(320, 460, 0));
+    gradientRing.setColor(ofColor(255, 255, 255, 60));
+    shapeSystem.add(gradientRing);
+
+    invertedGradientRing.setupGradientRing(60, -15, 57);
+    invertedGradientRing.setPosition(ofVec3f(320, 640, 0));
+    invertedGradientRing.setColor(ofColor(255, 255, 255, 60));
+    shapeSystem.add(invertedGradientRing);
 }
 
 void ofApp::update(){
