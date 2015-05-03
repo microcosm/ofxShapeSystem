@@ -33,17 +33,17 @@ void ofxShape::setupGradientRing(int resolution, float thickness_, float diamete
 
 void ofxShape::setupFilledArc(int resolution, float diameter_, float degrees) {
     setup(FILL_TYPE_FILLED, resolution, 0, diameter_);
-    setArcEndpoints(0, toRadians(degrees));
+    setArcEndpoints(0, degrees);
 }
 
 void ofxShape::setupHollowArc(int resolution, float thickness_, float diameter_, float degrees) {
     setup(FILL_TYPE_HOLLOW, resolution, thickness_, diameter_);
-    setArcEndpoints(0, toRadians(degrees));
+    setArcEndpoints(0, degrees);
 }
 
 void ofxShape::setupGradientArc(int resolution, float thickness_, float diameter_, float degrees) {
     setup(FILL_TYPE_GRADIENT, resolution, thickness_, diameter_);
-    setArcEndpoints(0, toRadians(degrees));
+    setArcEndpoints(0, degrees);
 }
 
 void ofxShape::setup(int numSides_, float thickness_, float diameter_) {
@@ -113,9 +113,9 @@ void ofxShape::setDiameter(float diameter_) {
     diameter = diameter_;
 }
 
-void ofxShape::setArcEndpoints(float startRadians, float endRadians) {
-    arcEndpointA = startRadians;
-    arcEndpointB = endRadians;
+void ofxShape::setArcEndpoints(float startDegrees, float endDegrees) {
+    arcEndpointA = toRadians(startDegrees);
+    arcEndpointB = toRadians(endDegrees);
 }
 
 void ofxShape::setColor(ofColor color_) {

@@ -41,7 +41,7 @@ public:
     void setBlur(float blur_);
     void setThickness(float thickness_);
     void setDiameter(float diameter_);
-    void setArcEndpoints(float startRadians, float endRadians);
+    void setArcEndpoints(float startDegrees, float endDegrees);
     void setColor(ofColor color_);
     
     void update();
