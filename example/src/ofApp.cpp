@@ -3,18 +3,23 @@
 void ofApp::setup(){
     shapeSystem.setup();
 
-    filledSquare.setupFilledSquare(20);
-    filledSquare.setPosition(ofVec3f(30, 30, 0));
+    filledSquare.setupFilledSquare(100);
+    filledSquare.setPosition(ofVec3f(120, 100, 0));
     shapeSystem.add(filledSquare);
 
-    hollowSquare.setupHollowSquare(5, 15);
-    hollowSquare.setPosition(ofVec3f(30, 60, 0));
+    hollowSquare.setupHollowSquare(25, 75);
+    hollowSquare.setPosition(ofVec3f(120, 280, 0));
     shapeSystem.add(hollowSquare);
 
-    gradientSquare.setupGradientSquare(5, 15);
-    gradientSquare.setBlur(10);
-    gradientSquare.setPosition(ofVec3f(30, 90, 0));
+    gradientSquare.setupGradientSquare(25, 75);
+    gradientSquare.setPosition(ofVec3f(120, 460, 0));
+    gradientSquare.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(gradientSquare);
+
+    invertedGradientSquare.setupGradientSquare(-25, 75);
+    invertedGradientSquare.setPosition(ofVec3f(120, 640, 0));
+    invertedGradientSquare.setColor(ofColor(255, 255, 255, 60));
+    shapeSystem.add(invertedGradientSquare);
 }
 
 void ofApp::update(){
@@ -22,7 +27,9 @@ void ofApp::update(){
 }
 
 void ofApp::draw(){
+    ofEnableAlphaBlending();
     shapeSystem.draw();
+    ofDisableAlphaBlending();
 }
 
 void ofApp::keyPressed(int key){

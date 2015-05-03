@@ -22,5 +22,5 @@ class ofApp : public ofBaseApp{
     void gotMessage(ofMessage msg);
     
     ofxShapeSystem shapeSystem;
-    ofxShape filledSquare, hollowSquare, gradientSquare;
+    ofxShape filledSquare, hollowSquare, gradientSquare, invertedGradientSquare;
 };
