@@ -5,7 +5,7 @@
 //https://github.com/jasonmcdermott/ofxForums/tree/master/vertexArrayGradientShapes
 
 void ofxShape::setupFilledSquare(float diameter_) {
-    setup(FILL_TYPE_FILLED, 4, diameter_, diameter_);
+    setup(FILL_TYPE_FILLED, 4, 0, diameter_);
     rotateZ(45);
 }
 
@@ -32,7 +32,7 @@ void ofxShape::setupGradientRing(int resolution, float thickness_, float diamete
 }
 
 void ofxShape::setupFilledArc(int resolution, float diameter_, float degrees) {
-    setup(FILL_TYPE_FILLED, resolution, diameter_, diameter_);
+    setup(FILL_TYPE_FILLED, resolution, 0, diameter_);
     setArcEndpoints(0, toRadians(degrees));
 }
 
