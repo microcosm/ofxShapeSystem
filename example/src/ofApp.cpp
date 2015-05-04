@@ -80,7 +80,16 @@ void ofApp::keyReleased(int key){
 }
 
 void ofApp::mouseMoved(int x, int y ){
-
+    float degreesZ = ofMap(x, 0, ofGetWidth(), 0, 360);
+    float degreesY = ofMap(y, 0, ofGetWidth(), 0, 360);
+    
+    vector <ofxShape*> shapes;
+    shapes = shapeSystem.getShapes();
+    
+    for(int i = 0; i < shapes.size(); i++) {
+        shapes.at(i)->rotateY(degreesY);
+        shapes.at(i)->rotateZ(degreesZ);
+    }
 }
 
 void ofApp::mouseDragged(int x, int y, int button){
