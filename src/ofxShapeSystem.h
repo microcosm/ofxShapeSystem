@@ -15,7 +15,8 @@ public:
     void add(ofxShape &shape);
     void update();
     void draw();
+    vector <ofxShape*> getShapes();
     
 private:
-    vector < ofxShape* > shapes;
+    vector <ofxShape*> shapes;
 };

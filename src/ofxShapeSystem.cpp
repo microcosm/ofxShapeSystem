@@ -31,3 +31,7 @@ void ofxShapeSystem::draw() {
     
     ofDisableAlphaBlending();
 }
+
+vector <ofxShape*> ofxShapeSystem::getShapes() {
+    return shapes;
+}
