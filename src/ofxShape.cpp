@@ -146,6 +146,10 @@ void ofxShape::positionZ(float positionZ) {
     position.z = positionZ;
 }
 
+float ofxShape::getDiameter() {
+    return diameter; 
+}
+
 void ofxShape::update() {
     
 }

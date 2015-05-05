@@ -44,14 +44,17 @@ public:
     void setArcEndpoints(float startDegrees, float endDegrees);
     void setColor(ofColor color_);
     
-    void update();
-    void draw();
     void rotateX(float degrees);
     void rotateY(float degrees);
     void rotateZ(float degrees);
     void positionX(float positionX);
     void positionY(float positionY);
     void positionZ(float positionZ);
+    
+    float getDiameter();
+    
+    void update();
+    void draw();
     
 private:
     void drawGradient(float opaque_, float transp_, float opac_, float blur_, int numSides_);
