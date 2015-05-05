@@ -19,8 +19,6 @@ void ofxShapeSystem::update() {
 }
 
 void ofxShapeSystem::draw() {
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
-    
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
     for(int i = 0; i < shapes.size(); i++) {
@@ -28,8 +26,6 @@ void ofxShapeSystem::draw() {
     }
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
-    
-    ofDisableAlphaBlending();
 }
 
 vector <ofxShape*> ofxShapeSystem::getShapes() {
