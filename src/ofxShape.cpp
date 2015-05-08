@@ -215,12 +215,11 @@ void ofxShape::drawGradient(float opaque_, float transp_, float opac_) {
     GLfloat* ver_cols = new GLfloat[numCoordPairs * 8];
 
     float angle;
-    //float angleSize = PI*2/numSides;
     float angleSize = (arcEndpointB - arcEndpointA) / numSides;
 
     for (int i = 0; i < numCoordPairs; i++) {
         angle = i * angleSize;
-        angle += arcEndpointA; //Added this
+        angle += arcEndpointA;
 
         ver_coords[i*4+0] = (opaque_ * cos(angle));
         ver_coords[i*4+1] = (opaque_ * sin(angle));

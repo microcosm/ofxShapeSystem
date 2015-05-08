@@ -72,6 +72,7 @@ void ofApp::update(){
         shapes.at(i)->scaleX(scaleX);
         shapes.at(i)->scaleY(scaleY);
     }
+
     shapeSystem.update();
 }
 
