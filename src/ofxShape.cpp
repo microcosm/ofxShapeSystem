@@ -6,14 +6,17 @@
 
 void ofxShape::setupFilledSquare(float diameter_) {
     setup(FILL_TYPE_FILLED, 4, 0, diameter_);
+    correctRotation();
 }
 
 void ofxShape::setupHollowSquare(float thickness_, float diameter_) {
     setup(FILL_TYPE_HOLLOW, 4, thickness_, diameter_);
+    correctRotation();
 }
 
 void ofxShape::setupGradientSquare(float thickness_, float diameter_) {
     setup(FILL_TYPE_GRADIENT, 4, thickness_, diameter_);
+    correctRotation();
 }
 
 void ofxShape::setupFilledRing(int resolution, float diameter_) {
@@ -83,6 +86,7 @@ void ofxShape::setup(ofVec3f centre_, ofVec3f rotation_, FillType fillType_, int
     setColor(color_);
     arcEndpointA = 0;
     arcEndpointB = 2 * PI;
+    correctRotation45 = false;
 }
 
 void ofxShape::setPosition(ofVec3f position_) {
@@ -162,6 +166,10 @@ void ofxShape::scaleZ(float scaleZ) {
     scale.z = scaleZ;
 }
 
+void ofxShape::correctRotation() {
+    correctRotation45 = true;
+}
+
 ofVec3f ofxShape::getPosition() {
     return position;
 }
@@ -200,6 +208,7 @@ void ofxShape::drawGradient(float opaque_, float transp_, float opac_, float blu
     ofRotateY(rotation.y);
     ofRotateZ(rotation.z);
     ofScale(scale.x, scale.y, scale.z);
+    if(correctRotation45) ofRotateZ(45);
     
     GLfloat* ver_coords = new GLfloat[ (numSides_+1) * 4];
     GLfloat* ver_cols = new GLfloat[ (numSides_+1) * 8];

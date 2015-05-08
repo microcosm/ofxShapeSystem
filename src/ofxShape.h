@@ -54,6 +54,7 @@ public:
     void scaleX(float scaleX);
     void scaleY(float scaleY);
     void scaleZ(float scaleZ);
+    void correctRotation();
 
     ofVec3f getPosition();
     ofVec2f getPositionXY();
@@ -70,6 +71,7 @@ private:
     float arcEndpointA, arcEndpointB, middleRadius;
     ofFloatColor color;
     FillType fillType;
+    bool correctRotation45;
 
     int numSides;
     float blur, thickness, diameter;
