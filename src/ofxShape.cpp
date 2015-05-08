@@ -6,17 +6,14 @@
 
 void ofxShape::setupFilledSquare(float diameter_) {
     setup(FILL_TYPE_FILLED, 4, 0, diameter_);
-    rotateZ(45);
 }
 
 void ofxShape::setupHollowSquare(float thickness_, float diameter_) {
     setup(FILL_TYPE_HOLLOW, 4, thickness_, diameter_);
-    rotateZ(45);
 }
 
 void ofxShape::setupGradientSquare(float thickness_, float diameter_) {
     setup(FILL_TYPE_GRADIENT, 4, thickness_, diameter_);
-    rotateZ(45);
 }
 
 void ofxShape::setupFilledRing(int resolution, float diameter_) {
@@ -72,15 +69,18 @@ void ofxShape::setup(ofVec3f centre_, FillType fillType_, int numSides_, float b
 }
 
 void ofxShape::setup(ofVec3f centre_, ofVec3f rotation_, FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_) {
+    ofVec3f defaultScale = ofVec3f(1, 1, 1);
+
     origin.set(centre_);
     setPosition(centre_);
+    setRotation(rotation_);
+    setScale(defaultScale);
     setFillType(fillType_);
     setNumSides(numSides_);
     setBlur(blur_);
     setThickness(thickness_);
     setDiameter(diameter_);
     setColor(color_);
-    setRotation(rotation_);
     arcEndpointA = 0;
     arcEndpointB = 2 * PI;
 }
@@ -91,6 +91,10 @@ void ofxShape::setPosition(ofVec3f position_) {
 
 void ofxShape::setRotation(ofVec3f rotation_) {
     rotation.set(rotation_);
+}
+
+void ofxShape::setScale(ofVec3f scale_) {
+    scale.set(scale_);
 }
 
 void ofxShape::setFillType(FillType fillType_) {
@@ -146,6 +150,18 @@ void ofxShape::positionZ(float positionZ) {
     position.z = positionZ;
 }
 
+void ofxShape::scaleX(float scaleX) {
+    scale.x = scaleX;
+}
+
+void ofxShape::scaleY(float scaleY) {
+    scale.y = scaleY;
+}
+
+void ofxShape::scaleZ(float scaleZ) {
+    scale.z = scaleZ;
+}
+
 ofVec3f ofxShape::getPosition() {
     return position;
 }
@@ -177,12 +193,13 @@ void ofxShape::draw() {
 }
 
 void ofxShape::drawGradient(float opaque_, float transp_, float opac_, float blur_, int numSides_) {
-    
+
     ofPushMatrix();
     ofTranslate(position.x, position.y, position.z);
     ofRotateX(rotation.x);
     ofRotateY(rotation.y);
     ofRotateZ(rotation.z);
+    ofScale(scale.x, scale.y, scale.z);
     
     GLfloat* ver_coords = new GLfloat[ (numSides_+1) * 4];
     GLfloat* ver_cols = new GLfloat[ (numSides_+1) * 8];

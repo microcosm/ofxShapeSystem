@@ -59,9 +59,19 @@ void ofApp::setup(){
     invertedGradientArc.setPosition(ofVec3f(520, 640, 0));
     invertedGradientArc.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(invertedGradientArc);
+
+    shapes = shapeSystem.getShapes();
 }
 
 void ofApp::update(){
+    float scale = sin(ofGetFrameNum() * 0.03);
+    float scaleX = ofMap(scale, -1, 1, 0.50, 0.75);
+    float scaleY = ofMap(scale, -1, 1, 0.75, 1.25);
+
+    for(int i = 0; i < shapes.size(); i++) {
+        shapes.at(i)->scaleX(scaleX);
+        shapes.at(i)->scaleY(scaleY);
+    }
     shapeSystem.update();
 }
 
@@ -80,12 +90,9 @@ void ofApp::keyReleased(int key){
 }
 
 void ofApp::mouseMoved(int x, int y ){
-    float degreesZ = ofMap(x, 0, ofGetWidth(), 0, 360);
-    float degreesY = ofMap(y, 0, ofGetWidth(), 0, 360);
-    
-    vector <ofxShape*> shapes;
-    shapes = shapeSystem.getShapes();
-    
+    float degreesY = ofMap(x, 0, ofGetWidth(), 0, 360);
+    float degreesZ = ofMap(y, 0, ofGetWidth(), 0, 360);
+
     for(int i = 0; i < shapes.size(); i++) {
         shapes.at(i)->rotateY(degreesY);
         shapes.at(i)->rotateZ(degreesZ);

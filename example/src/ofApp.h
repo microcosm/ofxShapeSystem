@@ -25,4 +25,5 @@ class ofApp : public ofBaseApp{
     ofxShape filledSquare, hollowSquare, gradientSquare, invertedGradientSquare;
     ofxShape filledRing, hollowRing, gradientRing, invertedGradientRing;
     ofxShape filledArc, hollowArc, gradientArc, invertedGradientArc;
+    vector<ofxShape*> shapes;
 };
