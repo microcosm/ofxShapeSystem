@@ -64,7 +64,7 @@ public:
     void draw();
 
 private:
-    void drawGradient(float opaque_, float transp_, float opac_, float blur_, int numSides_);
+    void drawGradient(float opaque_, float transp_, float opac_, int numSides_);
     float toRadians(float degrees);
 
     ofVec3f position, origin, rotation, scale;
