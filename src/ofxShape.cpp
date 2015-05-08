@@ -188,19 +188,19 @@ void ofxShape::update() {
 
 void ofxShape::draw() {
     if (fillType == FILL_TYPE_FILLED) {
-        drawGradient(diameter - blur, 0,               color.a, numSides);
-        drawGradient(diameter,        diameter - blur, 0,       numSides);
+        drawGradient(diameter - blur, 0,               color.a);
+        drawGradient(diameter,        diameter - blur, 0);
     } else if (fillType == FILL_TYPE_HOLLOW) {
-        drawGradient(diameter + thickness - blur, diameter - thickness + blur, color.a, numSides);
-        drawGradient(diameter + thickness,        diameter + thickness - blur, 0,       numSides);
-        drawGradient(diameter - thickness,        diameter - thickness + blur, 0,       numSides);
+        drawGradient(diameter + thickness - blur, diameter - thickness + blur, color.a);
+        drawGradient(diameter + thickness,        diameter + thickness - blur, 0);
+        drawGradient(diameter - thickness,        diameter - thickness + blur, 0);
     } else if (fillType == FILL_TYPE_GRADIENT) {
-        drawGradient(diameter - thickness,                    diameter + thickness, 0, numSides);
-        drawGradient(diameter + thickness + thickness * 0.05, diameter + thickness, 0, numSides);
+        drawGradient(diameter - thickness,                    diameter + thickness, 0);
+        drawGradient(diameter + thickness + thickness * 0.05, diameter + thickness, 0);
     }
 }
 
-void ofxShape::drawGradient(float opaque_, float transp_, float opac_, int numSides_) {
+void ofxShape::drawGradient(float opaque_, float transp_, float opac_) {
 
     ofPushMatrix();
     ofTranslate(position.x, position.y, position.z);
@@ -210,35 +210,36 @@ void ofxShape::drawGradient(float opaque_, float transp_, float opac_, int numSi
     ofScale(scale.x, scale.y, scale.z);
     if(correctRotation45) ofRotateZ(45);
 
-    GLfloat* ver_coords = new GLfloat[ (numSides_+1) * 4];
-    GLfloat* ver_cols = new GLfloat[ (numSides_+1) * 8];
+    int numCoordPairs = numSides + 1;
+    GLfloat* ver_coords = new GLfloat[numCoordPairs * 4];
+    GLfloat* ver_cols = new GLfloat[numCoordPairs * 8];
 
     float angle;
-    //float angleSize = PI*2/numSides_;
-    float angleSize = (arcEndpointB-arcEndpointA)/numSides_;
+    //float angleSize = PI*2/numSides;
+    float angleSize = (arcEndpointB - arcEndpointA) / numSides;
 
-    for (int i=0; i< (1+numSides_); i++) {
+    for (int i = 0; i < numCoordPairs; i++) {
         angle = i * angleSize;
         angle += arcEndpointA; //Added this
 
-        ver_coords[i*4+0] = (opaque_*cos(angle));
-        ver_coords[i*4+1] = (opaque_*sin(angle));
+        ver_coords[i*4+0] = (opaque_ * cos(angle));
+        ver_coords[i*4+1] = (opaque_ * sin(angle));
         ver_cols[i*8+0] = color.r;
         ver_cols[i*8+1] = color.g;
         ver_cols[i*8+2] = color.b;
         ver_cols[i*8+3] = opac_;
 
-        ver_coords[i*4+2] = (transp_*cos(angle));
-        ver_coords[i*4+3] = (transp_*sin(angle));
+        ver_coords[i*4+2] = (transp_ * cos(angle));
+        ver_coords[i*4+3] = (transp_ * sin(angle));
         ver_cols[i*8+4] = color.r;
         ver_cols[i*8+5] = color.g;
         ver_cols[i*8+6] = color.b;
         ver_cols[i*8+7] = color.a;
     }
 
-    glVertexPointer( 2, GL_FLOAT, 0, ver_coords);
+    glVertexPointer(2, GL_FLOAT, 0, ver_coords);
     glColorPointer(4, GL_FLOAT, 0, ver_cols);
-    glDrawArrays( GL_TRIANGLE_STRIP, 0, ( numSides_ + 1 ) * 2 );
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, numCoordPairs * 2);
 
     delete[] ver_coords;
     delete[] ver_cols;
