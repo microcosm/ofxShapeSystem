@@ -51,6 +51,8 @@ public:
     void positionY(float positionY);
     void positionZ(float positionZ);
     
+    ofVec3f getPosition();
+    ofVec2f getPositionXY();
     float getDiameter();
     
     void update();

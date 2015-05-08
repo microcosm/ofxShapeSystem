@@ -146,8 +146,16 @@ void ofxShape::positionZ(float positionZ) {
     position.z = positionZ;
 }
 
+ofVec3f ofxShape::getPosition() {
+    return position;
+}
+
+ofVec2f ofxShape::getPositionXY() {
+    return ofVec2f(position.x, position.y);
+}
+
 float ofxShape::getDiameter() {
-    return diameter; 
+    return diameter;
 }
 
 void ofxShape::update() {
