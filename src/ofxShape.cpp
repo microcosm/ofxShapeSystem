@@ -130,6 +130,10 @@ void ofxShape::setColor(ofColor color_) {
     color.set(color_);
 }
 
+void ofxShape::setOpacity(float opacity_) {
+    color.a = ofMap(opacity_, 0, 255, 0, 1);
+}
+
 void ofxShape::rotateX(float degrees) {
     rotation.x = degrees;
 }

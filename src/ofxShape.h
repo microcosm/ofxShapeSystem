@@ -44,6 +44,7 @@ public:
     void setDiameter(float diameter_);
     void setArcEndpoints(float startDegrees, float endDegrees);
     void setColor(ofColor color_);
+    void setOpacity(float opacity_);
 
     void rotateX(float degrees);
     void rotateY(float degrees);
