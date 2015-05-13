@@ -4,58 +4,58 @@ void ofApp::setup(){
     shapeSystem.setup();
 
     // Squares
-    filledSquare.setupFilledSquare(100);
+    filledSquare.setupFilledSquare(140);
     filledSquare.setPosition(ofVec3f(120, 100, 0));
     shapeSystem.add(filledSquare);
 
-    hollowSquare.setupHollowSquare(25, 75);
+    hollowSquare.setupHollowSquare(40, 100);
     hollowSquare.setPosition(ofVec3f(120, 280, 0));
     shapeSystem.add(hollowSquare);
 
-    gradientSquare.setupGradientSquare(25, 75);
+    gradientSquare.setupGradientSquare(40, 100);
     gradientSquare.setPosition(ofVec3f(120, 460, 0));
     gradientSquare.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(gradientSquare);
 
-    invertedGradientSquare.setupGradientSquare(-25, 75);
+    invertedGradientSquare.setupGradientSquare(-40, 100);
     invertedGradientSquare.setPosition(ofVec3f(120, 640, 0));
     invertedGradientSquare.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(invertedGradientSquare);
     
     // Rings
-    filledRing.setupFilledRing(60, 72);
+    filledRing.setupFilledRing(60, 140);
     filledRing.setPosition(ofVec3f(320, 100, 0));
     shapeSystem.add(filledRing);
     
-    hollowRing.setupHollowRing(60, 15, 57);
+    hollowRing.setupHollowRing(60, 40, 100);
     hollowRing.setPosition(ofVec3f(320, 280, 0));
     shapeSystem.add(hollowRing);
     
-    gradientRing.setupGradientRing(60, 15, 57);
+    gradientRing.setupGradientRing(60, 40, 100);
     gradientRing.setPosition(ofVec3f(320, 460, 0));
     gradientRing.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(gradientRing);
     
-    invertedGradientRing.setupGradientRing(60, -15, 57);
+    invertedGradientRing.setupGradientRing(60, -40, 100);
     invertedGradientRing.setPosition(ofVec3f(320, 640, 0));
     invertedGradientRing.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(invertedGradientRing);
     
     // Arcs
-    filledArc.setupFilledArc(60, 72, 180);
+    filledArc.setupFilledArc(60, 140, 180);
     filledArc.setPosition(ofVec3f(520, 100, 0));
     shapeSystem.add(filledArc);
     
-    hollowArc.setupHollowArc(60, 15, 57, 180);
+    hollowArc.setupHollowArc(60, 40, 100, 180);
     hollowArc.setPosition(ofVec3f(520, 280, 0));
     shapeSystem.add(hollowArc);
     
-    gradientArc.setupGradientArc(60, 15, 57, 180);
+    gradientArc.setupGradientArc(60, 40, 100, 180);
     gradientArc.setPosition(ofVec3f(520, 460, 0));
     gradientArc.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(gradientArc);
     
-    invertedGradientArc.setupGradientArc(60, -15, 57, 180);
+    invertedGradientArc.setupGradientArc(60, -40, 100, 180);
     invertedGradientArc.setPosition(ofVec3f(520, 640, 0));
     invertedGradientArc.setColor(ofColor(255, 255, 255, 60));
     shapeSystem.add(invertedGradientArc);
@@ -64,15 +64,7 @@ void ofApp::setup(){
 }
 
 void ofApp::update(){
-    float scale = sin(ofGetFrameNum() * 0.03);
-    float scaleX = ofMap(scale, -1, 1, 0.50, 0.75);
-    float scaleY = ofMap(scale, -1, 1, 0.75, 1.25);
-
-    for(int i = 0; i < shapes.size(); i++) {
-        shapes.at(i)->scaleX(scaleX);
-        shapes.at(i)->scaleY(scaleY);
-    }
-
+    ofBackground(ofColor::black);
     shapeSystem.update();
 }
 

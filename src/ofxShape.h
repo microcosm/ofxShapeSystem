@@ -15,9 +15,11 @@ public:
         FILL_TYPE_GRADIENT
     };
 
+    const float theta45Degrees = PI * 0.25;
+
     void setupFilledSquare(float sideLength);
-    void setupHollowSquare(float thickness_, float sideLength);
-    void setupGradientSquare(float thickness_, float sideLength);
+    void setupHollowSquare(float borderWeight, float sideLength);
+    void setupGradientSquare(float borderWeight, float sideLength);
 
     void setupFilledRing(int resolution, float diameter_);
     void setupHollowRing(int resolution, float thickness_, float diameter_);
@@ -67,9 +69,10 @@ public:
     void draw();
 
 private:
-    void drawGradient(float opaque_, float transp_, float opac_);
-    float toRadius(float squareSidelength);
+    void drawGradient(float opaqueVertexDistance, float opacityControlledVertexDistance, float opacityControl);
     float toRadians(float degrees);
+    float toRadius(float squareSidelength);
+    float toThickness(float squareBorderSize);
 
     ofVec3f position, origin, rotation, scale;
     float arcEndpointA, arcEndpointB, middleRadius;
@@ -78,5 +81,5 @@ private:
     bool correctRotation45;
 
     int numSides;
-    float blur, thickness, diameter, radius;
+    float blur, thickness, halfThickness, diameter, radius;
 };

@@ -11,15 +11,15 @@ void ofxShape::setupFilledSquare(float sideLength) {
     correctRotation();
 }
 
-void ofxShape::setupHollowSquare(float thickness_, float sideLength) {
-    setup(4, thickness_);
+void ofxShape::setupHollowSquare(float borderWeight, float sideLength) {
+    setup(4, toThickness(borderWeight));
     setFillType(FILL_TYPE_HOLLOW);
     setRadius(toRadius(sideLength));
     correctRotation();
 }
 
-void ofxShape::setupGradientSquare(float thickness_, float sideLength) {
-    setup(4, thickness_);
+void ofxShape::setupGradientSquare(float borderWeight, float sideLength) {
+    setup(4, toThickness(borderWeight));
     setFillType(FILL_TYPE_GRADIENT);
     setRadius(toRadius(sideLength));
     correctRotation();
@@ -126,6 +126,7 @@ void ofxShape::setBlur(float blur_) {
 
 void ofxShape::setThickness(float thickness_) {
     thickness = thickness_;
+    halfThickness = thickness_ * 0.5;
 }
 
 void ofxShape::setDiameter(float diameter_) {
@@ -212,12 +213,12 @@ void ofxShape::draw() {
         drawGradient(radius - blur, 0,             color.a);  //Draw fully opaque
         drawGradient(radius,        radius - blur, 0);        //Draw blur
     } else if (fillType == FILL_TYPE_HOLLOW) {
-        drawGradient(radius + thickness - blur, radius - thickness + blur, color.a); //Draw fully opaque
-        drawGradient(radius + thickness,        radius + thickness - blur, 0);       //Draw outer blur
-        drawGradient(radius - thickness,        radius - thickness + blur, 0);       //Draw inner blur
+        drawGradient(radius + halfThickness - blur, radius - halfThickness + blur, color.a); //Draw fully opaque
+        drawGradient(radius + halfThickness,        radius + halfThickness - blur, 0);       //Draw outer blur
+        drawGradient(radius - halfThickness,        radius - halfThickness + blur, 0);       //Draw inner blur
     } else if (fillType == FILL_TYPE_GRADIENT) {
-        drawGradient(radius - thickness,                    radius + thickness, 0);  //Draw the gradient
-        drawGradient(radius + thickness + thickness * 0.05, radius + thickness, 0);  //Hack definition via outer line
+        drawGradient(radius - halfThickness,                        radius + halfThickness, 0);  //Draw the gradient
+        drawGradient(radius + halfThickness + halfThickness * 0.05, radius + halfThickness, 0);  //Hack definition via outer line
     }
 }
 
@@ -266,11 +267,17 @@ void ofxShape::drawGradient(float opaqueVertexDistance, float opacityControlledV
     ofPopMatrix();
 }
 
-float ofxShape::toRadius(float squareSidelength) {
-    float theta = PI * 0.25;
-    return squareSidelength * cos(theta);
-}
-
 float ofxShape::toRadians(float degrees) {
     return ofMap(degrees, 0, 360, 0, PI * 2);
+}
+
+//These methods convert desired humanly-understandable values in relation to a square
+//and return the values needed by the 2D regular polygon drawing system
+float ofxShape::toRadius(float squareSidelength) {
+    return squareSidelength * cos(theta45Degrees);
+}
+
+float ofxShape::toThickness(float squareBorderSize) {
+    float currentSquareThickness = squareBorderSize * cos(theta45Degrees);
+    return ofMap(squareBorderSize, 0, currentSquareThickness, 0, squareBorderSize);
 }
