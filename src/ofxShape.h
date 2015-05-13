@@ -15,7 +15,7 @@ public:
         FILL_TYPE_GRADIENT
     };
 
-    const float theta45Degrees = PI * 0.25;
+    float theta45Degrees = PI * 0.25;
 
     void setupFilledSquare(float sideLength);
     void setupHollowSquare(float borderWeight, float sideLength);
