@@ -5,17 +5,23 @@
 //https://github.com/jasonmcdermott/ofxForums/tree/master/vertexArrayGradientShapes
 
 void ofxShape::setupFilledSquare(float sideLength) {
-    setup(FILL_TYPE_FILLED, 4, 0, toDiameter(sideLength));
+    setup(4, 0);
+    setFillType(FILL_TYPE_FILLED);
+    setRadius(toRadius(sideLength));
     correctRotation();
 }
 
 void ofxShape::setupHollowSquare(float thickness_, float sideLength) {
-    setup(FILL_TYPE_HOLLOW, 4, thickness_, toDiameter(sideLength));
+    setup(4, thickness_);
+    setFillType(FILL_TYPE_HOLLOW);
+    setRadius(toRadius(sideLength));
     correctRotation();
 }
 
 void ofxShape::setupGradientSquare(float thickness_, float sideLength) {
-    setup(FILL_TYPE_GRADIENT, 4, thickness_, toDiameter(sideLength));
+    setup(4, thickness_);
+    setFillType(FILL_TYPE_GRADIENT);
+    setRadius(toRadius(sideLength));
     correctRotation();
 }
 
@@ -44,6 +50,11 @@ void ofxShape::setupHollowArc(int resolution, float thickness_, float diameter_,
 void ofxShape::setupGradientArc(int resolution, float thickness_, float diameter_, float degrees) {
     setup(FILL_TYPE_GRADIENT, resolution, thickness_, diameter_);
     setArcEndpoints(0, degrees);
+}
+
+void ofxShape::setup(int numSides_, float thickness_) {
+    float defaultDiameter = 10;
+    setup(numSides_, thickness_, defaultDiameter);
 }
 
 void ofxShape::setup(int numSides_, float thickness_, float diameter_) {
@@ -119,6 +130,12 @@ void ofxShape::setThickness(float thickness_) {
 
 void ofxShape::setDiameter(float diameter_) {
     diameter = diameter_;
+    radius = diameter_ * 0.5;
+}
+
+void ofxShape::setRadius(float radius_) {
+    radius = radius_;
+    diameter = radius_ * 2;
 }
 
 void ofxShape::setArcEndpoints(float startDegrees, float endDegrees) {
@@ -192,19 +209,19 @@ void ofxShape::update() {
 
 void ofxShape::draw() {
     if (fillType == FILL_TYPE_FILLED) {
-        drawGradient(diameter - blur, 0,               color.a);
-        drawGradient(diameter,        diameter - blur, 0);
+        drawGradient(radius - blur, 0,             color.a);  //Draw fully opaque
+        drawGradient(radius,        radius - blur, 0);        //Draw blur
     } else if (fillType == FILL_TYPE_HOLLOW) {
-        drawGradient(diameter + thickness - blur, diameter - thickness + blur, color.a);
-        drawGradient(diameter + thickness,        diameter + thickness - blur, 0);
-        drawGradient(diameter - thickness,        diameter - thickness + blur, 0);
+        drawGradient(radius + thickness - blur, radius - thickness + blur, color.a); //Draw fully opaque
+        drawGradient(radius + thickness,        radius + thickness - blur, 0);       //Draw outer blur
+        drawGradient(radius - thickness,        radius - thickness + blur, 0);       //Draw inner blur
     } else if (fillType == FILL_TYPE_GRADIENT) {
-        drawGradient(diameter - thickness,                    diameter + thickness, 0);
-        drawGradient(diameter + thickness + thickness * 0.05, diameter + thickness, 0);
+        drawGradient(radius - thickness,                    radius + thickness, 0);  //Draw the gradient
+        drawGradient(radius + thickness + thickness * 0.05, radius + thickness, 0);  //Hack definition via outer line
     }
 }
 
-void ofxShape::drawGradient(float opaque_, float transp_, float opac_) {
+void ofxShape::drawGradient(float opaqueVertexDistance, float opacityControlledVertexDistance, float opacityControl) {
 
     ofPushMatrix();
     ofTranslate(position.x, position.y, position.z);
@@ -225,15 +242,15 @@ void ofxShape::drawGradient(float opaque_, float transp_, float opac_) {
         angle = i * angleSize;
         angle += arcEndpointA;
 
-        ver_coords[i*4+0] = (opaque_ * cos(angle));
-        ver_coords[i*4+1] = (opaque_ * sin(angle));
+        ver_coords[i*4+0] = (opaqueVertexDistance * cos(angle));
+        ver_coords[i*4+1] = (opaqueVertexDistance * sin(angle));
         ver_cols[i*8+0] = color.r;
         ver_cols[i*8+1] = color.g;
         ver_cols[i*8+2] = color.b;
-        ver_cols[i*8+3] = opac_;
+        ver_cols[i*8+3] = opacityControl;
 
-        ver_coords[i*4+2] = (transp_ * cos(angle));
-        ver_coords[i*4+3] = (transp_ * sin(angle));
+        ver_coords[i*4+2] = (opacityControlledVertexDistance * cos(angle));
+        ver_coords[i*4+3] = (opacityControlledVertexDistance * sin(angle));
         ver_cols[i*8+4] = color.r;
         ver_cols[i*8+5] = color.g;
         ver_cols[i*8+6] = color.b;
@@ -249,7 +266,7 @@ void ofxShape::drawGradient(float opaque_, float transp_, float opac_) {
     ofPopMatrix();
 }
 
-float ofxShape::toDiameter(float squareSidelength) {
+float ofxShape::toRadius(float squareSidelength) {
     float theta = PI * 0.25;
     return squareSidelength * cos(theta);
 }
