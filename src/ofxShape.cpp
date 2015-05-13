@@ -4,18 +4,18 @@
 //http://forum.openframeworks.cc/t/circles-with-holes-or-with-stroke/8173/6
 //https://github.com/jasonmcdermott/ofxForums/tree/master/vertexArrayGradientShapes
 
-void ofxShape::setupFilledSquare(float diameter_) {
-    setup(FILL_TYPE_FILLED, 4, 0, diameter_);
+void ofxShape::setupFilledSquare(float sideLength) {
+    setup(FILL_TYPE_FILLED, 4, 0, toDiameter(sideLength));
     correctRotation();
 }
 
-void ofxShape::setupHollowSquare(float thickness_, float diameter_) {
-    setup(FILL_TYPE_HOLLOW, 4, thickness_, diameter_);
+void ofxShape::setupHollowSquare(float thickness_, float sideLength) {
+    setup(FILL_TYPE_HOLLOW, 4, thickness_, toDiameter(sideLength));
     correctRotation();
 }
 
-void ofxShape::setupGradientSquare(float thickness_, float diameter_) {
-    setup(FILL_TYPE_GRADIENT, 4, thickness_, diameter_);
+void ofxShape::setupGradientSquare(float thickness_, float sideLength) {
+    setup(FILL_TYPE_GRADIENT, 4, thickness_, toDiameter(sideLength));
     correctRotation();
 }
 
@@ -247,6 +247,11 @@ void ofxShape::drawGradient(float opaque_, float transp_, float opac_) {
     delete[] ver_coords;
     delete[] ver_cols;
     ofPopMatrix();
+}
+
+float ofxShape::toDiameter(float squareSidelength) {
+    float theta = PI * 0.25;
+    return squareSidelength * cos(theta);
 }
 
 float ofxShape::toRadians(float degrees) {

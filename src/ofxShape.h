@@ -15,9 +15,9 @@ public:
         FILL_TYPE_GRADIENT
     };
 
-    void setupFilledSquare(float diameter_);
-    void setupHollowSquare(float thickness_, float diameter_);
-    void setupGradientSquare(float thickness_, float diameter_);
+    void setupFilledSquare(float sideLength);
+    void setupHollowSquare(float thickness_, float sideLength);
+    void setupGradientSquare(float thickness_, float sideLength);
 
     void setupFilledRing(int resolution, float diameter_);
     void setupHollowRing(int resolution, float thickness_, float diameter_);
@@ -66,6 +66,7 @@ public:
 
 private:
     void drawGradient(float opaque_, float transp_, float opac_);
+    float toDiameter(float squareSidelength);
     float toRadians(float degrees);
 
     ofVec3f position, origin, rotation, scale;
