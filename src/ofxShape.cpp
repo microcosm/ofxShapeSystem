@@ -164,6 +164,18 @@ void ofxShape::rotateZ(float degrees) {
     rotation.z = degrees;
 }
 
+void ofxShape::incrementRotateX(float amount) {
+    rotation.x += amount;
+}
+
+void ofxShape::incrementRotateY(float amount) {
+    rotation.y += amount;
+}
+
+void ofxShape::incrementRotateZ(float amount) {
+    rotation.z += amount;
+}
+
 void ofxShape::positionX(float positionX) {
     position.x = positionX;
 }
@@ -176,6 +188,18 @@ void ofxShape::positionZ(float positionZ) {
     position.z = positionZ;
 }
 
+void ofxShape::incrementPositionX(float amount) {
+    position.x += amount;
+}
+
+void ofxShape::incrementPositionY(float amount) {
+    position.y += amount;
+}
+
+void ofxShape::incrementPositionZ(float amount) {
+    position.z += amount;
+}
+
 void ofxShape::scaleX(float scaleX) {
     scale.x = scaleX;
 }
@@ -186,6 +210,18 @@ void ofxShape::scaleY(float scaleY) {
 
 void ofxShape::scaleZ(float scaleZ) {
     scale.z = scaleZ;
+}
+
+void ofxShape::incrementScaleX(float amount) {
+    scale.x += amount;
+}
+
+void ofxShape::incrementScaleY(float amount) {
+    scale.y += amount;
+}
+
+void ofxShape::incrementScaleZ(float amount) {
+    scale.z += amount;
 }
 
 void ofxShape::correctRotation() {
