@@ -84,9 +84,11 @@ void ofApp::keyReleased(int key){
 
 void ofApp::mouseMoved(int x, int y ){
     float degreesY = ofMap(x, 0, ofGetWidth(), 0, 360);
-    float degreesZ = ofMap(y, 0, ofGetWidth(), 0, 360);
+    float degreesZ = ofMap(y, 0, ofGetHeight(), 0, 360);
+    float blur = ofMap(y, 0, ofGetHeight(), 0, 20, true);
 
     for(int i = 0; i < shapes.size(); i++) {
+        shapes.at(i)->setBlur(blur);
         shapes.at(i)->rotateY(degreesY);
         shapes.at(i)->rotateZ(degreesZ);
     }
