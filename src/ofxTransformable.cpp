@@ -129,3 +129,19 @@ ofVec3f ofxTransformable::getPosition() {
 ofVec2f ofxTransformable::getPositionXY() {
     return ofVec2f(position.x, position.y);
 }
+
+ofVec3f ofxTransformable::getRotation() {
+    return rotation;
+}
+
+ofVec2f ofxTransformable::getRotationXY() {
+    return ofVec2f(rotation.x, rotation.y);
+}
+
+ofVec3f ofxTransformable::getScale() {
+    return scale;
+}
+
+ofVec2f ofxTransformable::getScaleXY() {
+    return ofVec2f(scale.x, scale.y);
+}

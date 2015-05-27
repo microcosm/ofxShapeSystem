@@ -37,10 +37,13 @@ public:
     void incrementScaleX(float amount);
     void incrementScaleY(float amount);
     void incrementScaleZ(float amount);
-    void correctRotation();
     
     ofVec3f getPosition();
     ofVec2f getPositionXY();
+    ofVec3f getRotation();
+    ofVec2f getRotationXY();
+    ofVec3f getScale();
+    ofVec2f getScaleXY();
     
 private:
     ofVec3f position, rotation, scale;
