@@ -5,8 +5,9 @@
 //https://github.com/jasonmcdermott/ofxForums/tree/master/vertexArrayGradientShapes
 
 #include "ofMain.h"
+#include "ofxTransformable.h"
 
-class ofxShape {
+class ofxShape : public ofxTransformable {
     
 public:
     enum FillType {
@@ -33,13 +34,9 @@ public:
     void setup(int numSides_, float thickness_, float diameter_);
     void setup(FillType fillType_, int numSides_, float thickness_, float diameter_);
     void setup(FillType fillType_, int numSides_, float thickness_, float diameter_, ofColor color_);
-    void setup(ofVec3f centre_, FillType fillType_, int numSides_, float thickness_, float diameter_, ofColor color_);
-    void setup(ofVec3f centre_, FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_);
-    void setup(ofVec3f centre_, ofVec3f rotation_, FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_);
+    void setup(FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_);
+    void setup(ofVec3f rotation_, FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_);
 
-    void setPosition(ofVec3f position_);
-    void setRotation(ofVec3f rotation_);
-    void setScale(ofVec3f rotation_);
     void setFillType(FillType fillType_);
     void setNumSides(int numSides_);
     void setBlur(float blur_);
@@ -49,29 +46,8 @@ public:
     void setArcEndpoints(float startDegrees, float endDegrees);
     void setColor(ofColor color_);
     void setOpacity(float opacity_);
-
-    void rotateX(float degrees);
-    void rotateY(float degrees);
-    void rotateZ(float degrees);
-    void incrementRotateX(float amount);
-    void incrementRotateY(float amount);
-    void incrementRotateZ(float amount);
-    void positionX(float positionX);
-    void positionY(float positionY);
-    void positionZ(float positionZ);
-    void incrementPositionX(float amount);
-    void incrementPositionY(float amount);
-    void incrementPositionZ(float amount);
-    void scaleX(float scaleX);
-    void scaleY(float scaleY);
-    void scaleZ(float scaleZ);
-    void incrementScaleX(float amount);
-    void incrementScaleY(float amount);
-    void incrementScaleZ(float amount);
+    
     void correctRotation();
-
-    ofVec3f getPosition();
-    ofVec2f getPositionXY();
     float getDiameter();
 
     void update();
@@ -83,7 +59,7 @@ private:
     float toRadius(float squareSidelength);
     float toThickness(float squareBorderSize);
 
-    ofVec3f position, origin, rotation, scale;
+    ofVec3f position, rotation, scale;
     float arcEndpointA, arcEndpointB, middleRadius;
     ofFloatColor color;
     FillType fillType;

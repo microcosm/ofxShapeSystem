@@ -68,27 +68,17 @@ void ofxShape::setup(FillType fillType_, int numSides_, float thickness_, float 
 }
 
 void ofxShape::setup(FillType fillType_, int numSides_, float thickness_, float diameter_, ofColor color_) {
-    ofVec3f defaultCenter = ofVec3f(0, 0, 0);
-    setup(defaultCenter, fillType_, numSides_, thickness_, diameter_, color_);
-}
-
-void ofxShape::setup(ofVec3f centre_, FillType fillType_, int numSides_, float thickness_, float diameter_, ofColor color_) {
     float defaultBlur = 0;
-    setup(centre_, fillType_, numSides_, defaultBlur, thickness_, diameter_, color_);
+    setup(fillType_, numSides_, defaultBlur, thickness_, diameter_, color_);
 }
 
-void ofxShape::setup(ofVec3f centre_, FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_) {
+void ofxShape::setup(FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_) {
     ofVec3f defaultRotation = ofVec3f(0, 0, 0);
-    setup(centre_, defaultRotation, fillType_, numSides_, blur_, thickness_, diameter_, color_);
+    setup(defaultRotation, fillType_, numSides_, blur_, thickness_, diameter_, color_);
 }
 
-void ofxShape::setup(ofVec3f centre_, ofVec3f rotation_, FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_) {
-    ofVec3f defaultScale = ofVec3f(1, 1, 1);
-
-    origin.set(centre_);
-    setPosition(centre_);
-    setRotation(rotation_);
-    setScale(defaultScale);
+void ofxShape::setup(ofVec3f rotation_, FillType fillType_, int numSides_, float blur_, float thickness_, float diameter_, ofColor color_) {
+    ofxTransformable::setup();
     setFillType(fillType_);
     setNumSides(numSides_);
     setBlur(blur_);
@@ -98,18 +88,6 @@ void ofxShape::setup(ofVec3f centre_, ofVec3f rotation_, FillType fillType_, int
     arcEndpointA = 0;
     arcEndpointB = 2 * PI;
     correctRotation45 = false;
-}
-
-void ofxShape::setPosition(ofVec3f position_) {
-    position.set(position_);
-}
-
-void ofxShape::setRotation(ofVec3f rotation_) {
-    rotation.set(rotation_);
-}
-
-void ofxShape::setScale(ofVec3f scale_) {
-    scale.set(scale_);
 }
 
 void ofxShape::setFillType(FillType fillType_) {
@@ -152,88 +130,8 @@ void ofxShape::setOpacity(float opacity_) {
     color.a = ofMap(opacity_, 0, 255, 0, 1);
 }
 
-void ofxShape::rotateX(float degrees) {
-    rotation.x = degrees;
-}
-
-void ofxShape::rotateY(float degrees) {
-    rotation.y = degrees;
-}
-
-void ofxShape::rotateZ(float degrees) {
-    rotation.z = degrees;
-}
-
-void ofxShape::incrementRotateX(float amount) {
-    rotation.x += amount;
-}
-
-void ofxShape::incrementRotateY(float amount) {
-    rotation.y += amount;
-}
-
-void ofxShape::incrementRotateZ(float amount) {
-    rotation.z += amount;
-}
-
-void ofxShape::positionX(float positionX) {
-    position.x = positionX;
-}
-
-void ofxShape::positionY(float positionY) {
-    position.y = positionY;
-}
-
-void ofxShape::positionZ(float positionZ) {
-    position.z = positionZ;
-}
-
-void ofxShape::incrementPositionX(float amount) {
-    position.x += amount;
-}
-
-void ofxShape::incrementPositionY(float amount) {
-    position.y += amount;
-}
-
-void ofxShape::incrementPositionZ(float amount) {
-    position.z += amount;
-}
-
-void ofxShape::scaleX(float scaleX) {
-    scale.x = scaleX;
-}
-
-void ofxShape::scaleY(float scaleY) {
-    scale.y = scaleY;
-}
-
-void ofxShape::scaleZ(float scaleZ) {
-    scale.z = scaleZ;
-}
-
-void ofxShape::incrementScaleX(float amount) {
-    scale.x += amount;
-}
-
-void ofxShape::incrementScaleY(float amount) {
-    scale.y += amount;
-}
-
-void ofxShape::incrementScaleZ(float amount) {
-    scale.z += amount;
-}
-
 void ofxShape::correctRotation() {
     correctRotation45 = true;
-}
-
-ofVec3f ofxShape::getPosition() {
-    return position;
-}
-
-ofVec2f ofxShape::getPositionXY() {
-    return ofVec2f(position.x, position.y);
 }
 
 float ofxShape::getDiameter() {
@@ -261,11 +159,7 @@ void ofxShape::draw() {
 void ofxShape::drawGradient(float opaqueVertexDistance, float opacityControlledVertexDistance, float opacityControl) {
 
     ofPushMatrix();
-    ofTranslate(position.x, position.y, position.z);
-    ofRotateX(rotation.x);
-    ofRotateY(rotation.y);
-    ofRotateZ(rotation.z);
-    ofScale(scale.x, scale.y, scale.z);
+    applyTransformations();
     if(correctRotation45) ofRotateZ(45);
 
     int numCoordPairs = numSides + 1;
