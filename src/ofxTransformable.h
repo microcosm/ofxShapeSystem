@@ -7,8 +7,10 @@ class ofxTransformable {
 public:
     void setup();
     void applyTransformations();
-
+    
     void setPosition(ofVec3f position_);
+    void setPosition(float x, float y);
+    void setPosition(float x, float y, float z);
     void positionX(float positionX);
     void positionY(float positionY);
     void positionZ(float positionZ);
@@ -17,6 +19,8 @@ public:
     void incrementPositionZ(float amount);
 
     void setRotation(ofVec3f rotation_);
+    void setRotation(float x, float y);
+    void setRotation(float x, float y, float z);
     void rotateX(float degrees);
     void rotateY(float degrees);
     void rotateZ(float degrees);
@@ -25,6 +29,8 @@ public:
     void incrementRotateZ(float amount);
 
     void setScale(ofVec3f rotation_);
+    void setScale(float x, float y);
+    void setScale(float x, float y, float z);
     void scaleX(float scaleX);
     void scaleY(float scaleY);
     void scaleZ(float scaleZ);

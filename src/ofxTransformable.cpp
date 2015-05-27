@@ -18,6 +18,14 @@ void ofxTransformable::setPosition(ofVec3f position_) {
     position.set(position_);
 }
 
+void ofxTransformable::setPosition(float x, float y) {
+    position.set(ofVec3f(x, y, position.z));
+}
+
+void ofxTransformable::setPosition(float x, float y, float z) {
+    position.set(ofVec3f(x, y, z));
+}
+
 void ofxTransformable::positionX(float positionX) {
     position.x = positionX;
 }
@@ -46,6 +54,14 @@ void ofxTransformable::setRotation(ofVec3f rotation_) {
     rotation.set(rotation_);
 }
 
+void ofxTransformable::setRotation(float x, float y) {
+    rotation.set(ofVec3f(x, y, rotation.z));
+}
+
+void ofxTransformable::setRotation(float x, float y, float z) {
+    rotation.set(ofVec3f(x, y, z));
+}
+
 void ofxTransformable::rotateX(float degrees) {
     rotation.x = degrees;
 }
@@ -72,6 +88,14 @@ void ofxTransformable::incrementRotateZ(float amount) {
 
 void ofxTransformable::setScale(ofVec3f scale_) {
     scale.set(scale_);
+}
+
+void ofxTransformable::setScale(float x, float y) {
+    scale.set(ofVec3f(x, y, scale.z));
+}
+
+void ofxTransformable::setScale(float x, float y, float z) {
+    scale.set(ofVec3f(x, y, z));
 }
 
 void ofxTransformable::scaleX(float scaleX) {
