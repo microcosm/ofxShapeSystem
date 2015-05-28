@@ -8,12 +8,11 @@ void ofxShapeSystem::setup() {
     ofxTransformable::setup();
 }
 
-void ofxShapeSystem::setupCube(float sideLength) {
+void ofxShapeSystem::setupCube(ofxShape &shape, float sideLength) {
     setup();
 
     float halfSideLength = sideLength * 0.5;
     builder.clear();
-    shape.setupFilledSquare(sideLength);
 
     shape.rotateX(90);
     shape.positionY(-halfSideLength);
@@ -39,6 +38,18 @@ void ofxShapeSystem::setupCube(float sideLength) {
     builder.push_back(shape);
 
     add(builder);
+}
+
+void ofxShapeSystem::setupCube(float sideLength, ofColor color) {
+    shape.setupFilledSquare(sideLength);
+    shape.setColor(color);
+    setupCube(shape, sideLength);
+}
+
+void ofxShapeSystem::setupCube(float borderWeight, float sideLength, ofColor color) {
+    shape.setupHollowSquare(borderWeight, sideLength);
+    shape.setColor(color);
+    setupCube(shape, sideLength + (borderWeight * 0.5));
 }
 
 void ofxShapeSystem::add(ofxShape &shape) {

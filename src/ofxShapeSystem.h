@@ -13,7 +13,9 @@ class ofxShapeSystem : public ofxTransformable {
     
 public:
     void setup();
-    void setupCube(float sideLength);
+    void setupCube(ofxShape &shape, float sideLength);
+    void setupCube(float sideLength, ofColor color);
+    void setupCube(float borderWeight, float sideLength, ofColor color);
     void add(ofxShape &shape);
     void add(vector<ofxShape> &_shapes);
     void update();
