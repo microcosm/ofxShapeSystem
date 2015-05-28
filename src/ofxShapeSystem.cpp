@@ -56,7 +56,7 @@ void ofxShapeSystem::add(ofxShape &shape) {
     shapes.push_back(&shape);
 }
 
-void ofxShapeSystem::add(vector<ofxShape> &_shapes) {
+void ofxShapeSystem::add(vector<ofxShape> _shapes) {
     for(int i = 0; i < _shapes.size(); i++) {
         add(_shapes.at(i));
     }
