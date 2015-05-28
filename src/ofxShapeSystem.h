@@ -18,7 +18,7 @@ public:
     void setupCube(float borderWeight, float sideLength, ofColor color);
     void add(ofxShape &shape);
     void add(vector<ofxShape> &_shapes);
-    void update();
+
     void draw();
     vector <ofxShape*> getShapes();
 

@@ -162,10 +162,6 @@ ofColor ofxShape::getColor() {
     return color;
 }
 
-void ofxShape::update() {
-    
-}
-
 void ofxShape::draw() {
     if (fillType == FILL_TYPE_FILLED) {
         drawGradient(radius - blur, 0,             color.a);  //Draw fully opaque

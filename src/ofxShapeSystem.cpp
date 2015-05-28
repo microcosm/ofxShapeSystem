@@ -62,12 +62,6 @@ void ofxShapeSystem::add(vector<ofxShape> &_shapes) {
     }
 }
 
-void ofxShapeSystem::update() {
-    for(int i = 0; i < shapes.size(); i++) {
-        shapes[i]->update();
-    }
-}
-
 void ofxShapeSystem::draw() {
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);

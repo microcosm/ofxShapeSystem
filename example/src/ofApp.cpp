@@ -64,11 +64,11 @@ void ofApp::setup(){
 }
 
 void ofApp::update(){
-    ofBackground(ofColor::black);
-    shapeSystem.update();
+
 }
 
 void ofApp::draw(){
+    ofBackground(ofColor::black);
     ofEnableAlphaBlending();
     shapeSystem.draw();
     ofDisableAlphaBlending();

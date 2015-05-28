@@ -56,7 +56,6 @@ public:
     float getRadius();
     ofColor getColor();
 
-    void update();
     void draw();
 
 private:
