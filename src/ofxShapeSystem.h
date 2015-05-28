@@ -13,11 +13,15 @@ class ofxShapeSystem : public ofxTransformable {
     
 public:
     void setup();
+    void setupCube(float sideLength);
     void add(ofxShape &shape);
+    void add(vector<ofxShape> &_shapes);
     void update();
     void draw();
     vector <ofxShape*> getShapes();
 
 private:
     vector <ofxShape*> shapes;
+    vector <ofxShape> builder;
+    ofxShape shape;
 };
