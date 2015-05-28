@@ -134,8 +134,32 @@ void ofxShape::correctRotation() {
     correctRotation45 = true;
 }
 
+ofxShape::FillType ofxShape::getFillType() {
+    return fillType;
+}
+
+int ofxShape::getNumSides() {
+    return numSides;
+}
+
+float ofxShape::getBlur() {
+    return blur;
+}
+
+float ofxShape::getThickness() {
+    return thickness;
+}
+
 float ofxShape::getDiameter() {
     return diameter;
+}
+
+float ofxShape::getRadius() {
+    return radius;
+}
+
+ofColor ofxShape::getColor() {
+    return color;
 }
 
 void ofxShape::update() {

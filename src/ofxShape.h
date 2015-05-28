@@ -48,7 +48,13 @@ public:
     void setOpacity(float opacity_);
     
     void correctRotation();
+    FillType getFillType();
+    int getNumSides();
+    float getBlur();
+    float getThickness();
     float getDiameter();
+    float getRadius();
+    ofColor getColor();
 
     void update();
     void draw();
